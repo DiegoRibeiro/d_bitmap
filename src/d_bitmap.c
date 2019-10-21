@@ -1,4 +1,5 @@
 #include "d_bitmap.h"
+#include <stdint.h>
 
 #pragma pack(1)
 struct d_bmp_header {
