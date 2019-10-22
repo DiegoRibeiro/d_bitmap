@@ -26,7 +26,7 @@ struct d_dib_header_v4 {
 	uint32_t blue_channel;
 	uint32_t alpha_channel;
 	uint32_t lcs;
-	uint8_t CIEXYZTRIPLE[24];
+	uint8_t CIEXYZTRIPLE[36];
 	uint32_t red_gamma;
 	uint32_t green_gamma;
 	uint32_t blue_gamma;
@@ -34,6 +34,8 @@ struct d_dib_header_v4 {
 #pragma pack()
 
 void d_init_bmp_header_v4(D_BMP_HEADER_V4 *hdr, uint32_t size) {
+    printf("bmp size: %d\n", sizeof(D_BMP_HEADER_V4));
+
     hdr->header_field = 0x4D42;
     hdr->size = size;
     hdr->reserved_1 = 0x0;
@@ -42,6 +44,8 @@ void d_init_bmp_header_v4(D_BMP_HEADER_V4 *hdr, uint32_t size) {
 }
 
 void d_init_dib_header_v4(D_DIB_HEADER_V4 *hdr, int32_t w, int32_t h, uint32_t raw_size) {
+    printf("dib size: %d\n", sizeof(D_DIB_HEADER_V4));
+
     hdr->header_size = 0x6C;
     hdr->width = w;
     hdr->height = h;
@@ -53,10 +57,11 @@ void d_init_dib_header_v4(D_DIB_HEADER_V4 *hdr, int32_t w, int32_t h, uint32_t r
     hdr->v_res = 0x130B;
     hdr->colors_pallete = 0x0;
     hdr->important_colors = 0x0;
-    hdr->red_channel    =   0x0000FF00;
-    hdr->green_channel  =   0x00FF0000;
-    hdr->blue_channel   =   0xFF000000;
-    hdr->alpha_channel  =   0x000000FF;
+    hdr->red_channel    =   0x000000FF;
+    hdr->green_channel  =   0x0000FF00;
+    hdr->blue_channel   =   0x00FF0000;
+    hdr->alpha_channel  =   0xFF000000;
+    hdr->lcs = 0x206E6957;
 
     for(int i = 0; i < 24; i++) {
         hdr->CIEXYZTRIPLE[i] = 0x0;
@@ -80,8 +85,8 @@ void d_write_dib_header_v4(FILE *fp, int32_t w, int32_t h, uint32_t raw_size) {
 }
 
 void d_write_pixel_v4(FILE *fp, D_PIXEL_A p) {
-    fwrite(&p.b, sizeof(uint8_t), 1, fp);
-	fwrite(&p.g, sizeof(uint8_t), 1, fp);
     fwrite(&p.r, sizeof(uint8_t), 1, fp);
+	fwrite(&p.g, sizeof(uint8_t), 1, fp);
+    fwrite(&p.b, sizeof(uint8_t), 1, fp);
     fwrite(&p.a, sizeof(uint8_t), 1, fp);
 }
