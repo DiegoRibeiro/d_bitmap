@@ -3,6 +3,8 @@
     
     #include <stdio.h>
 
+    #define HEADER_SIZE 54
+
     // private structs
     typedef struct d_bmp_header D_BMP_HEADER;
     typedef struct d_dib_header D_DIB_HEADER;

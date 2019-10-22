@@ -4,6 +4,9 @@
     #include <stdio.h>
     #include <stdint.h>
 
+    #define HEADER_V4_SIZE 122
+    #define PIXEL_V4_SIZE 4
+
     // private structs
     typedef struct d_bmp_header_v4 D_BMP_HEADER_V4;
     typedef struct d_dib_header_v4 D_DIB_HEADER_V4;
