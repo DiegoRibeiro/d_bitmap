@@ -25,5 +25,6 @@
     void d_write_bmp_header_v4(FILE *fp, uint32_t size);
     void d_write_dib_header_v4(FILE *fp, int32_t w, int32_t h, uint32_t raw_size);
     void d_write_pixel_v4(FILE *fp, D_PIXEL_A p);
+	void d_write_pixel_v4_n(FILE *fp, D_PIXEL_A p);
 #endif
 

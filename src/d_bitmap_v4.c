@@ -35,7 +35,7 @@ struct d_dib_header_v4 {
 #pragma pack()
 
 void d_init_bmp_header_v4(D_BMP_HEADER_V4 *hdr, uint32_t size) {
-    printf("bmp size: %d\n", sizeof(D_BMP_HEADER_V4));
+    //printf("bmp size: %d\n", sizeof(D_BMP_HEADER_V4));
 
     hdr->header_field = 0x4D42;
     hdr->size = size;
@@ -45,7 +45,7 @@ void d_init_bmp_header_v4(D_BMP_HEADER_V4 *hdr, uint32_t size) {
 }
 
 void d_init_dib_header_v4(D_DIB_HEADER_V4 *hdr, int32_t w, int32_t h, uint32_t raw_size) {
-    printf("dib size: %d\n", sizeof(D_DIB_HEADER_V4));
+    //printf("dib size: %d\n", sizeof(D_DIB_HEADER_V4));
 
     hdr->header_size = sizeof(D_DIB_HEADER_V4);
     hdr->width = w;
@@ -93,5 +93,12 @@ void d_write_pixel_v4(FILE *fp, D_PIXEL_A p) {
     fwrite(&p.b, sizeof(uint8_t), 1, fp);
 	fwrite(&p.g, sizeof(uint8_t), 1, fp);
     fwrite(&p.r, sizeof(uint8_t), 1, fp);
+    fwrite(&p.a, sizeof(uint8_t), 1, fp);
+}
+
+void d_write_pixel_v4_n(FILE *fp, D_PIXEL_A p) {
+    fwrite(&p.r, sizeof(uint8_t), 1, fp);
+	fwrite(&p.g, sizeof(uint8_t), 1, fp);
+    fwrite(&p.b, sizeof(uint8_t), 1, fp);
     fwrite(&p.a, sizeof(uint8_t), 1, fp);
 }
